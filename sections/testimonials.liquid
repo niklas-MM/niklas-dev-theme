@@ -1,0 +1,146 @@
+<style>
+  .testimonials-section {
+    padding: 60px 20px;
+    background-color: {{ section.settings.background_color }};
+  }
+  .testimonials-section__heading {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: {{ section.settings.text_color }};
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .testimonial-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+  .testimonial-card__stars {
+    color: #f5a623;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  .testimonial-card__text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .testimonial-card__name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #111;
+  }
+</style>
+
+<section class="testimonials-section">
+  <h2 class="testimonials-section__heading">{{ section.settings.heading }}</h2>
+
+  <div class="testimonials-grid">
+    {%- for block in section.blocks -%}
+      <div class="testimonial-card" {{ block.shopify_attributes }}>
+        <div class="testimonial-card__stars">
+          {%- for i in (1..block.settings.stars) -%}★{%- endfor -%}{%- assign empty_stars = 5 | minus: block.settings.stars -%}{%- for i in (1..empty_stars) -%}☆{%- endfor -%}
+        </div>
+        <p class="testimonial-card__text">"{{ block.settings.text }}"</p>
+        <p class="testimonial-card__name">{{ block.settings.name }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kundenbewertungen",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Das sagen unsere Kunden"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Hintergrundfarbe",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Textfarbe Überschrift",
+      "default": "#111111"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Bewertung",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Anna M."
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Bewertungstext",
+          "default": "Ein tolles Produkt! Kann ich nur weiterempfehlen."
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Sterne",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kundenbewertungen",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Anna M.",
+            "text": "Ein tolles Produkt! Kann ich nur weiterempfehlen.",
+            "stars": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Thomas K.",
+            "text": "Schnelle Lieferung und super Qualität. Bin begeistert!",
+            "stars": 5
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "name": "Lisa S.",
+            "text": "Genau das was ich gesucht habe. Sehr zufrieden!",
+            "stars": 4
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
