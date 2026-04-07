@@ -1,0 +1,36 @@
+<div class="custom-banner" style="background-color: {{ section.settings.bg_color }}; padding: 20px; text-align: center;">
+  <p style="color: {{ section.settings.text_color }}; margin: 0; font-size: 16px; font-weight: bold;">
+    {{ section.settings.text }}
+  </p>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Banner Text",
+      "default": "Neu: Vitamin B12 Drops für Kinder!"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Hintergrundfarbe",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Textfarbe",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Banner"
+    }
+  ]
+}
+{% endschema %}
