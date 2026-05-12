@@ -1,0 +1,65 @@
+<div class="vertrauens-bar" style="background-color: {{ section.settings.bg_color }}; padding: 20px;">
+  <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto;">
+    
+    {% for block in section.blocks %}
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 24px;">{{ block.settings.icon }}</span>
+        <span style="color: {{ section.settings.text_color }}; font-weight: bold; font-size: 14px;">
+          {{ block.settings.text }}
+        </span>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Vertrauens-Bar",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Hintergrundfarbe",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Textfarbe",
+      "default": "#111111"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Vertrauens-Element",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji Icon",
+          "default": "✅"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Kostenloser Versand"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vertrauens-Bar",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "🚚", "text": "Kostenloser Versand" } },
+        { "type": "item", "settings": { "icon": "↩️", "text": "30 Tage Rückgabe" } },
+        { "type": "item", "settings": { "icon": "🔒", "text": "Sicher bezahlen" } },
+        { "type": "item", "settings": { "icon": "⭐", "text": "Top bewertet" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
